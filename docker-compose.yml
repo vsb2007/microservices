@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   mongo_db:
-    image: mongo:${ver_mongo}
+    image: mongo:${VER_MONGO}
     volumes:
       - post_db:/data/db
     networks:
@@ -11,21 +11,21 @@ services:
           - comment_db
   ui:
     build: ./ui
-    image: ${USERNAME}/ui:${ver_ui}
+    image: ${USERNAME}/ui:${VER_UI}
     ports:
-      - ${port_ui_web}:${port_ui_docker}/tcp
+      - ${PORT_UI_WEB}:${PORT_UI_DOCKER}/tcp
     networks:
       - front_net
 
   post:
     build: ./post-py
-    image: ${USERNAME}/post:${ver_post}
+    image: ${USERNAME}/post:${VER_POST}
     networks:
       - front_net
       - back_net
   comment:
-    build: ./ui
-    image: ${USERNAME}/comment:${ver_comment}
+    build: ./comment
+    image: ${USERNAME}/comment:${VER_COMMENT}
     networks:
       - front_net
       - back_net
@@ -37,9 +37,9 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: ${back_net}
+        - subnet: ${BACK_NET}
   front_net:
     ipam:
       driver: default
       config:
-        - subnet: ${front_net}
+        - subnet: ${FRONT_NET}
