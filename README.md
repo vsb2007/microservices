@@ -14,3 +14,13 @@ $ docker-machine create --driver google \
 $ docker-machine ls
 $ eval $(docker-machine env docker-host)
 ```
+
+# docker-compose
+
+Основные команды:
+```
+docker-compose up -d
+docker-compose down
+docker-compose config
+```
+Параметризация в файле `.env`
