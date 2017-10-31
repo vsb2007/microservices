@@ -54,7 +54,6 @@ services:
   mongodb-exporter:
     image: vsb2007/mongodb_exporter
     networks:
-      - front_net
       - back_net
     environment:
       - MONGODB_URL=mongodb://mongo_db:27017
