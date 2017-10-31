@@ -10,7 +10,6 @@ services:
           - post_db
           - comment_db
   ui:
-    build: ./ui
     image: ${USERNAME}/ui:${VER_UI}
     ports:
       - ${PORT_UI_WEB}:${PORT_UI_DOCKER}/tcp
@@ -18,17 +17,25 @@ services:
       - front_net
 
   post:
-    build: ./post-py
     image: ${USERNAME}/post:${VER_POST}
     networks:
       - front_net
       - back_net
+
   comment:
-    build: ./comment
     image: ${USERNAME}/comment:${VER_COMMENT}
     networks:
       - front_net
       - back_net
+
+  prometheus:
+    image: ${USER_NAME}/prometheus
+    ports:
+      - '9090:9090'
+    networks:
+      - front_net
+      - back_net
+
 volumes:
   post_db:
 
