@@ -52,7 +52,7 @@ services:
       - back_net
 
   mongodb-exporter:
-    image: vsb2007/mongodb_exporter
+    image: ${USERNAME}/mongodb_exporter
     networks:
       - back_net
     environment:
