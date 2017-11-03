@@ -4,10 +4,10 @@ RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
 ADD Gemfile* $APP_HOME/
 RUN apk update && apk upgrade \
-&& apk --no-cache add ruby ruby-json \
-&& apk --no-cache add ruby-dev make g++ \
-&& gem install bundler --no-ri --no-rdoc \
-&& bundle install  --clean --no-cache \
+&& apk add ruby ruby-json \
+&& apk add ruby-dev make g++ \
+&& gem install bundler  --no-ri --no-rdoc \
+&& bundle install --no-cache \
 && gem uninstall bundler \
 && apk del ruby-dev make g++ \
 && gem cleanup \
