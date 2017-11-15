@@ -32,7 +32,7 @@ docker-compose config
 ```
 eval $(docker-machine env vm1)
 
-# ДЗ-22
+# ДЗ-22-23
 docker-machine create --driver google \
     --google-project docker-182005 \
     --google-machine-image https://www.googleapis.com/compute/v1/projects/ubuntu-os-cloud/global/images/family/ubuntu-1604-lts \
