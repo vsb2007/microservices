@@ -9,4 +9,3 @@ receivers:
 - name: 'slack-notifications'
   slack_configs:
   - channel: '#vladimir-baranov'
-

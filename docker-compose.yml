@@ -29,7 +29,7 @@ services:
       - back_net
 
   prometheus:
-    image: ${USER_NAME}/prometheus
+    image: ${USER_NAME}/prometheus:${VER_PROM}
     ports:
       - '9090:9090'
     networks:

@@ -50,7 +50,7 @@ def add_post():
     created_at = request.values.get("created_at")
     mongo_db.insert({"title": title, "link": link, "created_at": created_at, "votes": 0})
     br = request.user_agent.browser
-    if 'Putin' in title:
+    if 'putin' in title.lower():
         PUTIN_COUNT.inc()
     POST_COUNT.inc()
     return 'OK'
