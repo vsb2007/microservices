@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   prometheus:
-    env_file: .env-dev
+    env_file: .env-ops
     image: ${USERNAME}/prometheus:latest
     ports:
       - '${PROMETHEUS_WEB}:9090'
@@ -74,6 +74,7 @@ services:
 volumes:
   post_db:
   grafana_data:
+
 
 networks:
   back_net:

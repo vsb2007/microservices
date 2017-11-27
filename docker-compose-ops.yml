@@ -76,7 +76,7 @@ services:
           cpus: '0.30'
           memory: 300M
       mode: replicated
-      replicas: 1
+      replicas: 3
       update_config:
         delay: 10s
         parallelism: 2
