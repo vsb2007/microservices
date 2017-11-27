@@ -11,7 +11,8 @@ import time
 CONTENT_TYPE_LATEST = str('text/plain; version=0.0.4; charset=utf-8')
 REQUEST_DB_LATENCY = prometheus_client.Histogram('post_read_db_seconds', 'Request DB time')
 POST_COUNT = prometheus_client.Counter('post_count', 'A counter of new posts')
-PUTIN_COUNT = prometheus_client.Counter('putin_count', 'A counter of putin title')
+#PUTIN_COUNT = prometheus_client.Counter('putin_count', 'A counter of putin title')
+PUTIN_COUNT = prometheus_client.Gauge('putin_count', 'A counter of putin title')
 
 mongo_host = os.getenv('POST_DATABASE_HOST', '127.0.0.1')
 mongo_port = os.getenv('POST_DATABASE_PORT', '27017')
@@ -53,6 +54,9 @@ def add_post():
     if 'putin' in title.lower():
         PUTIN_COUNT.inc()
     POST_COUNT.inc()
+    if 'reset' in title.lower():
+        PUTIN_COUNT.set(0)
+
     return 'OK'
 
 
