@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   prometheus:
-    env_file: .env-ops
+    env_file: .env-ops-con
     image: ${USERNAME}/prometheus:latest
     ports:
       - '${PROMETHEUS_WEB}:9090'
