@@ -1,3 +1,4 @@
 account.json
 *.old
 build_info.txt
+kubernetes/kubernetes_the_hard_way/*.sh
