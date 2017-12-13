@@ -3,9 +3,8 @@
 #
 terraform {
   backend "gcs" {
-    bucket      = "vsb2007_terraform"
-    path        = "infra/terraform.tfstate"
-    project     = "infra-179306"
-#    credentials = "${file("account.json")}"
+    bucket  = "vsb2007_terraform"
+    path    = "kge/terraform.tfstate"
+    project = "infra-179306"
   }
 }
