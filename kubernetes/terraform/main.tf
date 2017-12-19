@@ -6,15 +6,15 @@ provider "google" {
 
 resource "google_container_cluster" "primary" {
   name               = "gke-test"
-  zone               = "europe-west1-b"
-  initial_node_count = 2
+  zone               = "us-central1-a"
+  initial_node_count = 3
 
   node_version       = "1.8.3-gke.0"
   min_master_version = "1.8.3-gke.0"
 
   node_config {
     disk_size_gb = "20"
-    machine_type = "g1-small"
+    machine_type = "n1-standard-1"
   }
 
   addons_config {
