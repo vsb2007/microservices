@@ -35,6 +35,8 @@ release:
   script:
     - setup_docker
     - release
+    - install_dependencies_git
+    - deploy_to_prod
   only:
     - master
 
@@ -114,6 +116,22 @@ review:
     curl -L -o /usr/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     chmod +x /usr/bin/kubectl
     kubectl version --client
+  }
+
+  function install_dependencies_git() {
+    apk add -U git
+  }
+
+  function deploy_to_prod() {
+    echo "Clone deploy repository..."
+    git clone http://gitlab-gitlab/$CI_PROJECT_NAMESPACE/reddit-deploy.git
+    echo "$CI_PIPELINE_ID-$CI_JOB_ID for COMMENT" >> reddit-deploy/comment.txt
+    cd reddit-deploy
+    git config --global user.email "$CD_USER_GIT@gitlab-gitlab.com"
+    git config --global user.name "$CD_USER_GIT"
+    git add commnet.txt
+    git commit -am "$CI_PIPELINE_ID-$CI_JOB_ID for COMMENT"
+    git push http://$CD_USER_GIT:$CD_USER_GIT_PASSWORD@gitlab-gitlab/$CI_PROJECT_NAMESPACE/reddit-deploy.git
   }
 
   function setup_docker() {
