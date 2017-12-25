@@ -129,7 +129,7 @@ review:
     cd reddit-deploy
     git config --global user.email "$CD_USER_GIT@gitlab-gitlab.com"
     git config --global user.name "$CD_USER_GIT"
-    git add commnet.txt
+    git add comment.txt
     git commit -am "$CI_PIPELINE_ID-$CI_JOB_ID for COMMENT"
     git push http://$CD_USER_GIT:$CD_USER_GIT_PASSWORD@gitlab-gitlab/$CI_PROJECT_NAMESPACE/reddit-deploy.git
   }
