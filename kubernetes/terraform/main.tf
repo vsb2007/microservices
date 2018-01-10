@@ -13,7 +13,7 @@ resource "google_container_cluster" "primary" {
   min_master_version = "1.8.3-gke.0"
 
   node_config {
-    disk_size_gb = "30"
+    disk_size_gb = "20"
     machine_type = "n1-standard-2"
   }
 

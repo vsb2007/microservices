@@ -1,4 +1,34 @@
 {
+  "__inputs": [
+    {
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
+      "description": "",
+      "type": "datasource",
+      "pluginId": "prometheus",
+      "pluginName": "Prometheus"
+    }
+  ],
+  "__requires": [
+    {
+      "type": "grafana",
+      "id": "grafana",
+      "name": "Grafana",
+      "version": "4.6.3"
+    },
+    {
+      "type": "panel",
+      "id": "graph",
+      "name": "Graph",
+      "version": ""
+    },
+    {
+      "type": "datasource",
+      "id": "prometheus",
+      "name": "Prometheus",
+      "version": "1.0.0"
+    }
+  ],
   "annotations": {
     "list": [
       {
@@ -16,7 +46,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "hideControls": false,
-  "id": 2,
+  "id": null,
   "links": [],
   "refresh": "10s",
   "rows": [
@@ -29,7 +59,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "description": "All HTTP request that UI service receives",
           "fill": 1,
           "id": 1,
@@ -57,7 +87,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "ui_request_count",
+              "expr": "ui_request_count{namespace=~\"$namespace\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -116,7 +146,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "Prometheus Server",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 2,
           "legend": {
@@ -143,7 +173,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(ui_request_count{http_status=~\"^[4,5].*\"}[5m])",
+              "expr": "rate(ui_request_count{http_status=~\"^[4,5].*\",namespace=~\"$namespace\"}[5m])",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -202,7 +232,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": null,
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 3,
           "legend": {
@@ -284,7 +314,28 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "ENV",
+        "multi": true,
+        "name": "namespace",
+        "options": [],
+        "query": "label_values(namespace)",
+        "refresh": 1,
+        "regex": "/.+/",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-5m",
@@ -317,5 +368,5 @@
   },
   "timezone": "",
   "title": "UI Service Monitoring",
-  "version": 3
+  "version": 4
 }

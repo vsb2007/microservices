@@ -1,8 +1,8 @@
 {
   "__inputs": [
     {
-      "name": "DS_PROMETHEUS_SERVER",
-      "label": "Prometheus Server",
+      "name": "DS_PROMETHEUS",
+      "label": "Prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -14,7 +14,7 @@
       "type": "grafana",
       "id": "grafana",
       "name": "Grafana",
-      "version": "4.6.1"
+      "version": "4.6.3"
     },
     {
       "type": "panel",
@@ -58,7 +58,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS_SERVER}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 1,
           "legend": {
@@ -85,7 +85,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(post_count[1h])",
+              "expr": "rate(post_count{namespace=~\"$namespace\"}[1h])",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -144,7 +144,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS_SERVER}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 2,
           "legend": {
@@ -171,7 +171,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "increase(comment_count[1h])",
+              "expr": "increase(comment_count{namespace=~\"$namespace\"}[1h])",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -230,7 +230,7 @@
           "bars": false,
           "dashLength": 10,
           "dashes": false,
-          "datasource": "${DS_PROMETHEUS_SERVER}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 3,
           "legend": {
@@ -257,7 +257,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "rate(putin_count[1h])",
+              "expr": "rate(putin_count{namespace=~\"$namespace\"}[1h])",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -312,7 +312,28 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_PROMETHEUS}",
+        "hide": 0,
+        "includeAll": true,
+        "label": "ENV",
+        "multi": true,
+        "name": "namespace",
+        "options": [],
+        "query": "label_values(namespace)",
+        "refresh": 1,
+        "regex": "/.+/",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-6h",
@@ -345,5 +366,5 @@
   },
   "timezone": "",
   "title": "Business_Logic_Monitoring",
-  "version": 6
+  "version": 2
 }
